@@ -1,0 +1,12 @@
+{
+    "mcpServers": {
+      "browserbase": {
+        "command": "node",
+        "args": ["/Users/caseyjoiner/servers/mcp-server-browserbase/browserbase/dist/index.js"],
+        "env": {
+          "BROWSERBASE_API_KEY": "bb_live_sW6J3kLSOyjRfh8kCNLYJ2RH1aU",
+          "BROWSERBASE_PROJECT_ID": "a30e1d5b-190a-440c-a341-8a241cb861ce"
+        }
+      }
+    }
+  }

@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .cursorrules
+
+# Cursor MCP configuration (contains API keys)
+.cursor/
