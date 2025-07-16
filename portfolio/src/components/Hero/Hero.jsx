@@ -1,11 +1,11 @@
 function Hero() {
   return (
-    <div className="max-w-7xl mx-auto px-8 pt-8 pb-32">
+    <div className="px-4 pt-8 pb-32">
       <div className="min-h-[80vh] flex flex-col">
         {/* Large Name Treatment - Right Aligned, Single Line */}
         <div className="mb-16 text-right">
-          <h1 className="text-6xl md:text-8xl font-light tracking-tight text-gray-900 leading-none">
-            CASEY JOINER
+          <h1 className="text-7xl md:text-9xl font-bold tracking-wide text-gray-900 leading-none">
+            CASEY&nbsp;&nbsp;&nbsp;JOINER
           </h1>
         </div>
 
