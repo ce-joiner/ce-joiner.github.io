@@ -22,7 +22,8 @@ function Work() {
           <motion.div
             className="h-px bg-gray-900"
             initial={{ scaleX: 0 }}
-            animate={{ scaleX: isInView ? 1 : 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
             transition={{
               duration: 1.2,
               ease: "easeInOut",
@@ -34,8 +35,8 @@ function Work() {
           />
         </div>
 
-        {/* Projects will go here */}
-        <div className="max-w-6xl mx-auto">
+        {/* Projects */}
+        <div>
           {projects.map((project, index) => (
             <ProjectCard
               key={project.id}
@@ -49,4 +50,4 @@ function Work() {
   )
 }
 
-export default Work 
+export default Work

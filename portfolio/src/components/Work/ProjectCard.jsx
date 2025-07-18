@@ -33,37 +33,37 @@ function ProjectCard({ project, index }) {
 
   // Render project info
   const ProjectInfo = () => (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div>
-        <h3 className="text-3xl font-light tracking-wide text-gray-900 mb-2">
+        <h3 className="text-2xl font-light tracking-wide text-gray-900 mb-2">
           {title}
         </h3>
         {client && (
-          <p className="text-sm tracking-wide text-gray-500 mb-4">
+          <p className="text-xs tracking-wide text-gray-500 mb-3 uppercase">
             {client}
           </p>
         )}
       </div>
 
-      <p className="text-lg leading-relaxed text-gray-700 font-light">
+      <p className="text-base leading-relaxed text-gray-700 font-light">
         {description}
       </p>
 
-      <div className="space-y-2">
-        <p className="text-sm tracking-wide text-gray-500 uppercase">
+      <div className="space-y-1">
+        <p className="text-xs tracking-wide text-gray-500 uppercase">
           Tech Stack
         </p>
-        <p className="text-base text-gray-600">
+        <p className="text-sm text-gray-600">
           {techStack}
         </p>
       </div>
 
-      <div className="pt-4">
+      <div className="pt-2">
         <a
           href={liveUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block text-sm tracking-wide text-gray-900 border-b border-gray-900 hover:border-gray-400 transition-colors duration-300"
+          className="inline-block text-xs tracking-wide text-gray-900 border-b border-gray-900 hover:border-gray-400 transition-colors duration-300 uppercase"
         >
           View Live Site
         </a>
@@ -78,39 +78,42 @@ function ProjectCard({ project, index }) {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      className={`relative overflow-hidden bg-gray-100 min-h-[300px] ${className}`}
+      className={`relative overflow-hidden bg-gray-100 ${className}`}
+      style={{ maxWidth: '600px' }}
     >
       <img
         src={image.src}
         alt={image.alt}
         loading="lazy"
         className="w-full h-auto object-cover"
-        onLoad={() => console.log('Successfully loaded:', image.src)}
       />
     </motion.div>
   )
 
   // Render double images (side by side)
   const DoubleImages = () => (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-2 gap-3" style={{ maxWidth: '600px' }}>
       {images.map((image, imgIndex) => (
         <motion.div
           key={imgIndex}
           variants={imageVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
           className="relative overflow-hidden"
         >
           <img
             src={image.src}
             alt={image.alt}
             loading="lazy"
-            className="w-full h-auto object-cover relative z-10"
+            className="w-full h-auto object-cover"
           />
         </motion.div>
       ))}
     </div>
   )
 
-  // Layout rendering based on layout type
+  // LEFT ALIGNED: Image left, text right
   if (layout === 'image-left') {
     return (
       <motion.div
@@ -118,41 +121,40 @@ function ProjectCard({ project, index }) {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
-        className="grid grid-cols-12 gap-8 mb-32"
+        className="flex gap-8 mb-32 justify-start items-start"
+        style={{ maxWidth: '900px' }}
       >
-        {/* Image on left */}
-        <div className="col-span-7">
+        <div className="flex-shrink-0">
           <SingleImage image={images[0]} />
         </div>
-        {/* Text on right */}
-        <div className="col-span-5">
+        <div className="w-80">
           <ProjectInfo />
         </div>
       </motion.div>
     )
   }
 
-  if (layout === 'image-left-double') {
+  // RIGHT ALIGNED: Text left, image right  
+  if (layout === 'image-right') {
     return (
       <motion.div
         variants={cardVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
-        className="grid grid-cols-12 gap-8 mb-32"
+        className="flex gap-8 mb-32 justify-end items-start"
       >
-        {/* Double images on left */}
-        <div className="col-span-7">
-          <DoubleImages />
-        </div>
-        {/* Text on right */}
-        <div className="col-span-5">
+        <div className="w-80">
           <ProjectInfo />
+        </div>
+        <div className="flex-shrink-0">
+          <SingleImage image={images[0]} />
         </div>
       </motion.div>
     )
   }
 
+  // RIGHT ALIGNED DOUBLE: Text left, double images right
   if (layout === 'image-right-double') {
     return (
       <motion.div
@@ -160,39 +162,20 @@ function ProjectCard({ project, index }) {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
-        className="grid grid-cols-12 gap-8 mb-32"
+        className="flex gap-8 mb-32 justify-end items-start"
       >
-        {/* Text on left */}
-        <div className="col-span-5">
+        <div className="w-80">
           <ProjectInfo />
         </div>
-        {/* Double images on right */}
-        <div className="col-span-7">
+        <div className="flex-shrink-0">
           <DoubleImages />
         </div>
       </motion.div>
     )
   }
 
-  // Default: image-right (single image)
-  return (
-    <motion.div
-      variants={cardVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      className="grid grid-cols-12 gap-8 mb-32"
-    >
-      {/* Text on left */}
-      <div className="col-span-5">
-        <ProjectInfo />
-      </div>
-      {/* Image on right */}
-      <div className="col-span-7">
-        <SingleImage image={images[0]} />
-      </div>
-    </motion.div>
-  )
+  // Default fallback
+  return null
 }
 
 export default ProjectCard
