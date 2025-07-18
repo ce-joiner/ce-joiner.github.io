@@ -65,7 +65,7 @@ function ProjectCard({ project, index }) {
           rel="noopener noreferrer"
           className="inline-block text-xs tracking-wide text-gray-900 border-b border-gray-900 hover:border-gray-400 transition-colors duration-300 uppercase"
         >
-          View Live Site
+          {liveUrl.includes('github.com') ? 'View the GitHub Repo' : 'View Live Site'}
         </a>
       </div>
     </div>

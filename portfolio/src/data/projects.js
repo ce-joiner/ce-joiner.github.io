@@ -36,7 +36,7 @@ const projects = [
       title: 'Fresh Futures',
       description: 'A collaborative mapping application addressing food accessibility in urban environments.',
       techStack: 'Python, PostgreSQL/PostGIS, GeoDjango, JavaScript, HTML, CSS, Leaflet.js, Mapbox API',
-      liveUrl: '#', // Add when available
+      liveUrl: 'https://github.com/annamiriams/fresh-futures',
       githubUrl: 'https://github.com/annamiriams/fresh-futures',
       images: [
         {
