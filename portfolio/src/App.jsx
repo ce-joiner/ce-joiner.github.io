@@ -1,4 +1,5 @@
 import Hero from './components/Hero/Hero'
+import Introduction from './components/ui/Introduction'
 import Work from './components/Work/Work'
 import About from './components/About/About'
 import Contact from './components/Contact/Contact'
@@ -15,6 +16,11 @@ function App() {
         {/* Hero Section */}
         <section className="min-h-screen">
           <Hero />
+        </section>
+
+        {/* Introduction Section */}
+        <section className="min-h-screen">
+          <Introduction />
         </section>
 
         {/* Work Section */}

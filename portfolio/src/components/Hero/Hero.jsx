@@ -161,8 +161,16 @@ function Hero() {
         </svg>
 
         {/* Large Scroll Circle - Visible in viewport */}
-        <div className="absolute bottom-44 left-1/2 transform -translate-x-1/2">
-          <div className="w-20 h-20 rounded-full border-2 border-gray-400 flex items-center justify-center cursor-pointer hover:border-gray-600 transition-colors duration-300">
+        <div className="absolute bottom-52 left-1/2 transform -translate-x-1/2">
+          <div
+            className="w-20 h-20 rounded-full border-2 border-gray-400 flex items-center justify-center cursor-pointer hover:border-gray-600 transition-colors duration-300"
+            onClick={() => {
+              document.getElementById('introduction')?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+              });
+            }}
+          >
             <div className="text-2xl text-gray-400">
               ↓
             </div>
