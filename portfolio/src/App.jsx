@@ -19,7 +19,7 @@ function App() {
         </section>
 
         {/* Introduction Section */}
-        <section className="min-h-screen">
+        <section>
           <Introduction />
         </section>
 
