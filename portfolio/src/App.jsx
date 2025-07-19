@@ -24,17 +24,17 @@ function App() {
         </section>
 
         {/* Work Section */}
-        <section className="min-h-screen">
+        <section>
           <Work />
         </section>
 
         {/* About Section */}
-        <section className="min-h-screen">
+        <section>
           <About />
         </section>
 
         {/* Contact Section */}
-        <section className="min-h-screen">
+        <section>
           <Contact />
         </section>
       </main>
