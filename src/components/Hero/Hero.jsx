@@ -22,8 +22,8 @@ function Hero() {
   // Generate scatter positions once on mount to avoid recalculation on each render
   const [scatterPositions] = useState(() => 
     nameChars.map(() => ({
-      x: (Math.random() - 0.5) * 400,
-      y: (Math.random() - 0.5) * 300,
+      x: (Math.random() - 0.5) * (typeof window !== 'undefined' ? window.innerWidth * 0.8 : 600), // Use 80% of screen width
+      y: (Math.random() - 0.5) * (typeof window !== 'undefined' ? window.innerHeight * 0.6 : 400), // Use 60% of screen height
       rotate: (Math.random() - 0.5) * 360,
       scale: 0.8 + (Math.random() * 0.4)
     }))
@@ -176,18 +176,18 @@ function Hero() {
       <div className="min-h-screen relative">
         {/* Name with entrance animation + interactive scatter effect */}
         <motion.div 
-          className="absolute top-4 right-0 select-none"
-          style={{ pointerEvents: isScattered && isDesktop ? 'none' : 'auto' }} // Disable parent clicks when "oh no!" should be clickable
+          className="absolute top-4 left-0 right-0 select-none" // Changed to span full width
+          style={{ pointerEvents: isScattered && isDesktop ? 'none' : 'auto' }}
         >
           <motion.h1 
             className="cursor-pointer text-5xl sm:text-5xl md:text-7xl lg:text-9xl font-bold tracking-wide leading-none text-right"
             onClick={toggleScatter}
             animate={{ 
-              color: isScattered ? "#F02F34" : "#111827", // Red when scattered, black when normal
-              opacity: (isScattered && isDesktop) ? 0 : 1 // Only hide on desktop when scattered
+              color: isScattered ? "#F02F34" : "#111827",
+              opacity: (isScattered && isDesktop) ? 0 : 1 // Only hide on desktop
             }}
             whileHover={{ 
-              color: "#F02F34" // Red on hover (desktop)
+              color: "#F02F34"
             }}
             transition={{ duration: 0.3 }}
           >
