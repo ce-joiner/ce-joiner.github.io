@@ -20,14 +20,25 @@ function Hero() {
   const nameChars = Array.from(fullName)
   
   // Generate scatter positions once on mount to avoid recalculation on each render
-  const [scatterPositions] = useState(() => 
-    nameChars.map(() => ({
-      x: (Math.random() - 0.5) * (typeof window !== 'undefined' ? window.innerWidth * 0.9 : 600), // 90% screen width
-      y: Math.random() * 150 - 50, // Between -50px and +100px from name position (nav to "creative software developer")
-      rotate: (Math.random() - 0.5) * 360,
-      scale: 0.8 + (Math.random() * 0.4)
-    }))
-  )
+  const [scatterPositions] = useState(() => {
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 400
+    const screenHeight = typeof window !== 'undefined' ? window.innerHeight : 800
+    
+    return nameChars.map(() => {
+      // Ensure positions stay well within screen bounds
+      const maxX = Math.min(screenWidth * 0.4, 300) // Max 40% of screen or 300px
+      const minX = -Math.min(screenWidth * 0.4, 300) // Symmetric negative
+      const maxY = 120 // Stay above "creative software developer"
+      const minY = -30 // Stay below nav
+      
+      return {
+        x: minX + Math.random() * (maxX - minX), // Random between minX and maxX
+        y: minY + Math.random() * (maxY - minY), // Random between minY and maxY
+        rotate: (Math.random() - 0.5) * 360,
+        scale: 0.8 + (Math.random() * 0.4)
+      }
+    })
+  })
 
   const toggleScatter = () => setIsScattered(prev => !prev)
 
