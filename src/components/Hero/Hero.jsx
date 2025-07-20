@@ -121,7 +121,7 @@ function Hero() {
         </div>
 
         {/* And plenty other things */}
-        <div className="absolute top-96 sm:top-72 md:top-96 left-12">
+        <div className="absolute top-96 sm:top-72 md:top-96 left-12 md:left-64">
           <p ref={otherRef} className="text-base sm:text-lg md:text-xl lg:text-2xl font-light text-gray-700 italic">
             and plenty other things.
           </p>
