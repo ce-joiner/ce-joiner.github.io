@@ -8,6 +8,12 @@ function Hero() {
   const otherRef = useRef(null)
   const [lines, setLines] = useState([])
   const [isScattered, setIsScattered] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(true) // Start as true to prevent flash
+
+  // Detect if we're on desktop (has hover capability)
+  useEffect(() => {
+    setIsDesktop(window.matchMedia('(hover: hover)').matches)
+  }, [])
 
   // Combine both names into single array for cleaner processing
   const fullName = "CASEY JOINER"
@@ -171,14 +177,14 @@ function Hero() {
         {/* Name with entrance animation + interactive scatter effect */}
         <motion.div 
           className="absolute top-4 right-0 select-none"
-          style={{ pointerEvents: isScattered ? 'none' : 'auto' }} // Disable clicks when scattered
+          style={{ pointerEvents: isScattered && isDesktop ? 'none' : 'auto' }} // Disable parent clicks when "oh no!" should be clickable
         >
           <motion.h1 
             className="cursor-pointer text-5xl sm:text-5xl md:text-7xl lg:text-9xl font-bold tracking-wide leading-none text-right"
             onClick={toggleScatter}
             animate={{ 
               color: isScattered ? "#F02F34" : "#111827", // Red when scattered, black when normal
-              opacity: isScattered ? 0 : 1 // Hide name when scattered (desktop click bug)
+              opacity: (isScattered && isDesktop) ? 0 : 1 // Only hide on desktop when scattered
             }}
             whileHover={{ 
               color: "#F02F34" // Red on hover (desktop)
@@ -221,24 +227,30 @@ function Hero() {
             </div>
           </motion.h1>
 
-          {/* Easter egg text when name disappears - centered and clickable */}
-          <motion.div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
-            onClick={toggleScatter}
-            animate={{
-              opacity: isScattered ? 1 : 0,
-              scale: isScattered ? 1 : 0.8
-            }}
-            transition={{ 
-              duration: 0.4,
-              delay: isScattered ? 0.2 : 0 // Small delay when appearing
-            }}
-            style={{ pointerEvents: isScattered ? 'auto' : 'none' }} // Only clickable when visible
-          >
-            <span className="text-sm md:text-base font-light italic" style={{ color: '#F02F34' }}>
-              oh no!
-            </span>
-          </motion.div>
+          {/* Easter egg text when name disappears - DESKTOP ONLY */}
+          {isDesktop && isScattered && (
+            <motion.div
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+              onClick={toggleScatter}
+              animate={{
+                opacity: 1,
+                scale: 1
+              }}
+              initial={{
+                opacity: 0,
+                scale: 0.8
+              }}
+              transition={{ 
+                duration: 0.4,
+                delay: 0.2 // Small delay when appearing
+              }}
+              style={{ pointerEvents: 'auto' }} // Make sure it's clickable
+            >
+              <span className="text-sm md:text-base font-light italic" style={{ color: '#F02F34' }}>
+                oh no!
+              </span>
+            </motion.div>
+          )}
         </motion.div>
 
         {/* Creative Software Developer */}
