@@ -8,17 +8,17 @@ function Work() {
   const isInView = useInView(ref, { once: true, amount: 0.3 })
 
   return (
-    <div className="px-4 pt-4 pb-32">
+    <div className="px-4 pt-16 pb-32">
       <div ref={ref} className="max-w-full">
         {/* Portfolio Header - Left Aligned */}
-        <div className="text-left mb-8">
-          <h2 className="text-4xl md:text-3xl font-light tracking-wide text-gray-900">
+        <div className="text-left mb-4">
+          <h2 className="text-3xl md:text-2xl font-light tracking-wide text-gray-900">
             PORTFOLIO
           </h2>
         </div>
 
         {/* Animated Dividing Line */}
-        <div className="relative mb-16">
+        <div className="relative mb-8">
           <motion.div
             className="h-px bg-gray-900"
             initial={{ scaleX: 0 }}

@@ -18,7 +18,7 @@ function Introduction() {
     const words = text.split(' ')
 
     return (
-        <div id="introduction" className="px-6 -mt-80 sm:-mt-80 md:-mt-80 pb-4 md:pb-32">
+        <div id="introduction" className="px-6 -mt-64 sm:-mt-64 md:-mt-64 pb-4 md:pb-32">
             <div className="min-h-[30vh] sm:min-h-[50vh] md:min-h-[80vh] flex items-center justify-center">
                 <div className="max-w-4xl mx-auto w-full">
                     <div ref={ref} className="text-xl sm:text-2xl md:text-5xl lg:text-6xl font-light text-gray-900 leading-relaxed text-center px-2">
