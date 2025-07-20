@@ -12,7 +12,7 @@ function App() {
       <Navigation />
 
       {/* Main Content - Continuous Scroll */}
-      <main className="pt-20">
+      <main className="pt-16">
         {/* Hero Section */}
         <section>
           <Hero />

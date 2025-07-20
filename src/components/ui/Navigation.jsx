@@ -41,7 +41,7 @@ function Navigation() {
 
     return (
         <nav className="fixed top-0 left-0 z-50 w-full">
-            <div className="px-4 py-4 relative">
+            <div className="px-4 pt-4 pb-2 relative">
                 {/* Contact Section */}
                 <div
                     className="absolute top-4 left-4"

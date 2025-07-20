@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
-const Hero = () => {
+function Hero() {
   const creativeRef = useRef(null)
   const visualRef = useRef(null)
   const otherRef = useRef(null)
@@ -10,77 +10,84 @@ const Hero = () => {
     const calculateLines = () => {
       if (!creativeRef.current || !visualRef.current || !otherRef.current) return
 
-      const creative = creativeRef.current.getBoundingClientRect()
-      const visual = visualRef.current.getBoundingClientRect()
-      const other = otherRef.current.getBoundingClientRect()
-      const container = document.querySelector('.relative')?.getBoundingClientRect()
+      const container = creativeRef.current.closest('.relative')
+      const containerRect = container.getBoundingClientRect()
 
-      if (!container) return
+      // Get positions relative to container
+      const creativeRect = creativeRef.current.getBoundingClientRect()
+      const visualRect = visualRef.current.getBoundingClientRect()
+      const otherRect = otherRef.current.getBoundingClientRect()
 
-      const offsetX = container.left
-      const offsetY = container.top
+      // Calculate relative positions
+      const creativeEnd = {
+        x: creativeRect.right - containerRect.left,
+        y: creativeRect.top + creativeRect.height / 2 - containerRect.top
+      }
 
-      const newLines = [
-        {
-          horizontal: {
-            x1: creative.right - offsetX,
-            y1: creative.top + creative.height / 2 - offsetY,
-            x2: creative.right - offsetX + 60,
-            y2: creative.top + creative.height / 2 - offsetY
-          },
-          vertical: {
-            x1: creative.right - offsetX + 60,
-            y1: creative.top + creative.height / 2 - offsetY,
-            x2: creative.right - offsetX + 60,
-            y2: creative.bottom - offsetY + 20
-          },
-          arrow: {
-            x: creative.right - offsetX + 60,
-            y: creative.bottom - offsetY + 20
-          }
+      const visualCenter = {
+        x: visualRect.left + visualRect.width / 2 - containerRect.left,
+        y: visualRect.top + visualRect.height / 2 - containerRect.top
+      }
+
+      const visualStart = {
+        x: visualRect.left - containerRect.left,
+        y: visualRect.top + visualRect.height / 2 - containerRect.top
+      }
+
+      const otherCenter = {
+        x: otherRect.left + otherRect.width / 2 - containerRect.left,
+        y: otherRect.top + otherRect.height / 2 - containerRect.top
+      }
+
+      // First L-shape: creative developer → visual artist (straight down)
+      const line1 = {
+        horizontal: {
+          x1: creativeEnd.x,
+          y1: creativeEnd.y,
+          x2: visualCenter.x, // Go directly to visual artist center x
+          y2: creativeEnd.y
         },
-        {
-          horizontal: {
-            x1: visual.left - offsetX - 60,
-            y1: visual.top + visual.height / 2 - offsetY,
-            x2: visual.left - offsetX,
-            y2: visual.top + visual.height / 2 - offsetY
-          },
-          vertical: {
-            x1: visual.left - offsetX - 60,
-            y1: visual.top + visual.height / 2 - offsetY,
-            x2: visual.left - offsetX - 60,
-            y2: visual.bottom - offsetY + 20
-          },
-          arrow: {
-            x: visual.left - offsetX - 60,
-            y: visual.bottom - offsetY + 20
-          }
+        vertical: {
+          x1: visualCenter.x, // Start at visual artist center x
+          y1: creativeEnd.y,
+          x2: visualCenter.x, // End at visual artist center x (straight down)
+          y2: visualCenter.y - 16 // Stop 16px above the text
         },
-        {
-          horizontal: {
-            x1: other.right - offsetX,
-            y1: other.top + other.height / 2 - offsetY,
-            x2: other.right - offsetX + 40,
-            y2: other.top + other.height / 2 - offsetY
-          },
-          vertical: {
-            x1: other.right - offsetX + 40,
-            y1: other.top + other.height / 2 - offsetY,
-            x2: other.right - offsetX + 40,
-            y2: other.bottom - offsetY + 20
-          },
-          arrow: {
-            x: other.right - offsetX + 40,
-            y: other.bottom - offsetY + 20
-          }
+        arrow: {
+          x: visualCenter.x, // Arrow directly over center of "visual artist"
+          y: visualCenter.y - 16
         }
-      ]
+      }
 
-      setLines(newLines)
+      // Second L-shape: visual artist → and plenty other things
+      const line2 = {
+        horizontal: {
+          x1: visualStart.x,
+          y1: visualStart.y,
+          x2: otherCenter.x, // Go to the center of "and plenty other things"
+          y2: visualStart.y
+        },
+        vertical: {
+          x1: otherCenter.x, // Start vertical line at "and plenty other things" center x
+          y1: visualStart.y,
+          x2: otherCenter.x,
+          y2: otherCenter.y - 16 // Stop 16px above the text
+        },
+        arrow: {
+          x: otherCenter.x, // Arrow directly over center of "and plenty other things"
+          y: otherCenter.y - 16
+        }
+      }
+
+      setLines([line1, line2])
     }
 
-    const timer = setTimeout(calculateLines, 100)
+    // Add a small delay to ensure DOM elements are fully positioned
+    const timer = setTimeout(() => {
+      calculateLines()
+    }, 100)
+
+    // Also calculate on resize
     window.addEventListener('resize', calculateLines)
 
     return () => {
@@ -92,10 +99,10 @@ const Hero = () => {
   return (
     <div className="px-4 pt-8 pb-32">
       <div className="min-h-screen relative">
-        {/* Large Name Treatment - Moved closer to top, bigger on mobile */}
+        {/* Large Name Treatment - Closer to nav, bigger on mobile */}
         <div className="absolute top-4 right-0">
           <h1 className="text-5xl sm:text-5xl md:text-7xl lg:text-9xl font-bold tracking-wide text-gray-900 leading-none text-right">
-            <span className="block sm:inline">CASEY</span>
+            <span className="block sm:inline">TEST</span>
             <span className="block sm:inline sm:ml-4">JOINER</span>
           </h1>
         </div>
