@@ -22,18 +22,18 @@ function Hero() {
   // Generate scatter positions once on mount to avoid recalculation on each render
   const [scatterPositions] = useState(() => {
     const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 400
-    const screenHeight = typeof window !== 'undefined' ? window.innerHeight : 800
     
     return nameChars.map(() => {
-      // Ensure positions stay well within screen bounds
-      const maxX = Math.min(screenWidth * 0.4, 300) // Max 40% of screen or 300px
-      const minX = -Math.min(screenWidth * 0.4, 300) // Symmetric negative
-      const maxY = 120 // Stay above "creative software developer"
-      const minY = -30 // Stay below nav
+      // Calculate safe bounds based on letter size and screen width
+      const letterWidth = 50 // Approximate max letter width
+      const safeMinX = -screenWidth * 0.3 // Don't go too far left
+      const safeMaxX = screenWidth * 0.3 // Don't go too far right
+      const safeMinY = -20 // Stay below nav
+      const safeMaxY = 100 // Stay above descriptions
       
       return {
-        x: minX + Math.random() * (maxX - minX), // Random between minX and maxX
-        y: minY + Math.random() * (maxY - minY), // Random between minY and maxY
+        x: safeMinX + Math.random() * (safeMaxX - safeMinX),
+        y: safeMinY + Math.random() * (safeMaxY - safeMinY),
         rotate: (Math.random() - 0.5) * 360,
         scale: 0.8 + (Math.random() * 0.4)
       }
@@ -184,7 +184,7 @@ function Hero() {
   }, [])
 
   return (
-    <div className="px-4 pt-4 pb-32">
+    <div className="px-4 pt-4 pb-32 overflow-hidden"> {/* Added overflow-hidden to prevent horizontal scroll */}
       <div className="min-h-screen relative">
         {/* Name with entrance animation + interactive scatter effect */}
         <motion.div 
