@@ -158,7 +158,7 @@ function Hero() {
         </svg>
 
         {/* Large Scroll Circle with Circular Text */}
-        <div className="absolute top-[32rem] sm:top-[30rem] md:top-[36rem] lg:bottom-52 left-1/2 transform -translate-x-1/2">
+        <div className="absolute top-[30rem] sm:top-[28rem] md:top-[34rem] lg:bottom-52 left-1/2 transform -translate-x-1/2">
           <div
             className="w-20 h-20 md:w-28 md:h-28 flex items-center justify-center cursor-pointer relative group"
             onClick={() => {
@@ -170,7 +170,7 @@ function Hero() {
           >
             {/* Circular Text */}
             <CircularText 
-              text="SCROLL • DOWN • EXPLORE • "
+              text="GO • THIS • WAY • "
               className="group-hover:duration-[3s]"
             />
             
