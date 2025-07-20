@@ -126,7 +126,7 @@ function About() {
                 className="relative overflow-hidden bg-gray-100 w-28 h-36 md:w-32 md:h-40 lg:w-36 lg:h-44 flex-shrink-0"
               >
                 <img
-                  src="/images/profilePic.webp"
+                  src="public/images/profilePic.webp"
                   alt="Casey Joiner"
                   className="w-full h-full object-cover"
                   loading="lazy"
