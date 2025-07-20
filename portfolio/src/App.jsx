@@ -14,7 +14,7 @@ function App() {
       {/* Main Content - Continuous Scroll */}
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="min-h-screen">
+        <section>
           <Hero />
         </section>
 

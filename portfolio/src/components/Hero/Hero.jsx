@@ -98,7 +98,7 @@ function Hero() {
 
   return (
     <div className="px-4 pt-8 pb-32">
-      <div className="min-h-screen relative">
+      <div className="min-h-[80vh] sm:min-h-screen relative">
         {/* Large Name Treatment - Stacked on mobile */}
         <div className="absolute top-0 right-0">
           <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-bold tracking-wide text-gray-900 leading-none text-right">
@@ -161,8 +161,8 @@ function Hero() {
           ))}
         </svg>
 
-        {/* Large Scroll Circle - Much closer to text */}
-        <div className="absolute top-80 sm:top-96 md:top-[28rem] lg:bottom-52 left-1/2 transform -translate-x-1/2">
+        {/* Large Scroll Circle - Move down from text */}
+        <div className="absolute top-96 sm:top-[26rem] md:top-[32rem] lg:bottom-52 left-1/2 transform -translate-x-1/2">
           <div
             className="w-20 h-20 md:w-28 md:h-28 rounded-full border-2 border-gray-400 flex items-center justify-center cursor-pointer hover:border-gray-600 transition-colors duration-300"
             onClick={() => {
@@ -181,4 +181,5 @@ function Hero() {
     </div>
   )
 }
+
 export default Hero
