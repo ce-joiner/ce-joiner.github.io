@@ -22,8 +22,8 @@ function Hero() {
   // Generate scatter positions once on mount to avoid recalculation on each render
   const [scatterPositions] = useState(() => 
     nameChars.map(() => ({
-      x: (Math.random() - 0.5) * (typeof window !== 'undefined' ? window.innerWidth * 0.8 : 600), // Use 80% of screen width
-      y: (Math.random() - 0.5) * (typeof window !== 'undefined' ? window.innerHeight * 0.6 : 400), // Use 60% of screen height
+      x: (Math.random() - 0.5) * (typeof window !== 'undefined' ? window.innerWidth * 0.9 : 600), // 90% screen width
+      y: Math.random() * 150 - 50, // Between -50px and +100px from name position (nav to "creative software developer")
       rotate: (Math.random() - 0.5) * 360,
       scale: 0.8 + (Math.random() * 0.4)
     }))
@@ -61,6 +61,7 @@ function Hero() {
       y: scatterPositions[index].y,
       rotate: scatterPositions[index].rotate,
       scale: scatterPositions[index].scale,
+      opacity: 1, // Force letters to stay visible when scattered
       transition: {
         type: "spring",
         damping: 6, // Even less damping for slower settle
