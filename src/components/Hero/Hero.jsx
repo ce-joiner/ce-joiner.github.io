@@ -57,9 +57,9 @@ function Hero() {
       scale: scatterPositions[index].scale,
       transition: {
         type: "spring",
-        damping: 10,
-        stiffness: 200,
-        duration: 0.4,
+        damping: 6, // Even less damping for slower settle
+        stiffness: 80, // Much less stiff for slower movement
+        duration: 1.2, // Even longer duration
       }
     })
   }
@@ -185,17 +185,9 @@ function Hero() {
             }}
             transition={{ duration: 0.3 }}
           >
-            {nameChars.map((char, index) => {
-              // Handle space character separately (no animation needed)
-              if (isSpace(char)) {
-                return (
-                  <span key={index} className="sm:ml-4">
-                    {char}
-                  </span>
-                )
-              }
-
-              return (
+            {/* Split name at space for proper mobile stacking */}
+            <div className="block sm:inline">
+              {nameChars.slice(0, 5).map((char, index) => (
                 <motion.span
                   key={index}
                   custom={index}
@@ -208,8 +200,25 @@ function Hero() {
                 >
                   {char}
                 </motion.span>
-              )
-            })}
+              ))}
+            </div>
+            <span className="sm:ml-4"></span>
+            <div className="block sm:inline sm:ml-4">
+              {nameChars.slice(6).map((char, index) => (
+                <motion.span
+                  key={index + 6}
+                  custom={index + 6}
+                  variants={letterVariants}
+                  initial="hidden"
+                  animate={isScattered ? "scattered" : "visible"}
+                  whileHover="scattered"
+                  transition={{ delay: getStaggerDelay(index + 6) }}
+                  className="inline-block"
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </div>
           </motion.h1>
 
           {/* Easter egg text when name disappears - centered and clickable */}
