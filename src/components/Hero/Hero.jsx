@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import CircularText from './CircularText'
 
 function Hero() {
@@ -6,6 +7,75 @@ function Hero() {
   const visualRef = useRef(null)
   const otherRef = useRef(null)
   const [lines, setLines] = useState([])
+  const [isScattered, setIsScattered] = useState(false)
+
+  // Combine both names into single array for cleaner processing
+  const fullName = "CASEY JOINER"
+  const nameChars = Array.from(fullName)
+  
+  // Generate scatter positions once on mount to avoid recalculation on each render
+  const [scatterPositions] = useState(() => 
+    nameChars.map(() => ({
+      x: (Math.random() - 0.5) * 400,
+      y: (Math.random() - 0.5) * 300,
+      rotate: (Math.random() - 0.5) * 360,
+      scale: 0.8 + (Math.random() * 0.4)
+    }))
+  )
+
+  const toggleScatter = () => setIsScattered(prev => !prev)
+
+  // Unified variants - same animation for both hover and tap (no color here)
+  const letterVariants = {
+    // Initial entrance animation
+    hidden: {
+      y: -100,
+      opacity: 0,
+      scale: 0.5,
+      rotate: Math.random() * 20 - 10,
+    },
+    // Normal resting state
+    visible: {
+      x: 0,
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100,
+        bounce: 0.6,
+        duration: 0.8,
+      }
+    },
+    // Scattered state (positions only, color handled by h1)
+    scattered: (index) => ({
+      x: scatterPositions[index].x,
+      y: scatterPositions[index].y,
+      rotate: scatterPositions[index].rotate,
+      scale: scatterPositions[index].scale,
+      transition: {
+        type: "spring",
+        damping: 10,
+        stiffness: 200,
+        duration: 0.4,
+      }
+    })
+  }
+
+  // Helper to determine if character should have space styling
+  const isSpace = (char) => char === ' '
+  
+  // Helper to calculate stagger delay based on character index
+  const getStaggerDelay = (index) => {
+    // "CASEY" (indices 0-4) starts at 0.3s
+    // " " (index 5) has no delay
+    // "JOINER" (indices 6-11) starts at 0.8s
+    if (index <= 4) return 0.3 + (index * 0.1)
+    if (index === 5) return 0 // Space has no animation
+    return 0.8 + ((index - 6) * 0.1) // Subtract 6 to reset JOINER counter
+  }
 
   useEffect(() => {
     const calculateLines = () => {
@@ -98,13 +168,69 @@ function Hero() {
   return (
     <div className="px-4 pt-4 pb-32">
       <div className="min-h-screen relative">
-        {/* Large Name Treatment */}
-        <div className="absolute top-4 right-0">
-          <h1 className="text-5xl sm:text-5xl md:text-7xl lg:text-9xl font-bold tracking-wide text-gray-900 leading-none text-right">
-            <span className="block sm:inline">CASEY</span>
-            <span className="block sm:inline sm:ml-4">JOINER</span>
-          </h1>
-        </div>
+        {/* Name with entrance animation + interactive scatter effect */}
+        <motion.div 
+          className="absolute top-4 right-0 select-none"
+          style={{ pointerEvents: isScattered ? 'none' : 'auto' }} // Disable clicks when scattered
+        >
+          <motion.h1 
+            className="cursor-pointer text-5xl sm:text-5xl md:text-7xl lg:text-9xl font-bold tracking-wide leading-none text-right"
+            onClick={toggleScatter}
+            animate={{ 
+              color: isScattered ? "#F02F34" : "#111827", // Red when scattered, black when normal
+              opacity: isScattered ? 0 : 1 // Hide name when scattered (desktop click bug)
+            }}
+            whileHover={{ 
+              color: "#F02F34" // Red on hover (desktop)
+            }}
+            transition={{ duration: 0.3 }}
+          >
+            {nameChars.map((char, index) => {
+              // Handle space character separately (no animation needed)
+              if (isSpace(char)) {
+                return (
+                  <span key={index} className="sm:ml-4">
+                    {char}
+                  </span>
+                )
+              }
+
+              return (
+                <motion.span
+                  key={index}
+                  custom={index}
+                  variants={letterVariants}
+                  initial="hidden"
+                  animate={isScattered ? "scattered" : "visible"}
+                  whileHover="scattered"
+                  transition={{ delay: getStaggerDelay(index) }}
+                  className="inline-block"
+                >
+                  {char}
+                </motion.span>
+              )
+            })}
+          </motion.h1>
+
+          {/* Easter egg text when name disappears - centered and clickable */}
+          <motion.div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+            onClick={toggleScatter}
+            animate={{
+              opacity: isScattered ? 1 : 0,
+              scale: isScattered ? 1 : 0.8
+            }}
+            transition={{ 
+              duration: 0.4,
+              delay: isScattered ? 0.2 : 0 // Small delay when appearing
+            }}
+            style={{ pointerEvents: isScattered ? 'auto' : 'none' }} // Only clickable when visible
+          >
+            <span className="text-sm md:text-base font-light italic" style={{ color: '#F02F34' }}>
+              oh no!
+            </span>
+          </motion.div>
+        </motion.div>
 
         {/* Creative Software Developer */}
         <div className="absolute top-48 sm:top-40 md:top-48 left-0">
@@ -121,7 +247,7 @@ function Hero() {
         </div>
 
         {/* And plenty other things */}
-        <div className="absolute top-96 sm:top-72 md:top-96 left-12 md:left-64">
+        <div className="absolute top-96 sm:top-72 md:top-96 left-12 md:left-24">
           <p ref={otherRef} className="text-base sm:text-lg md:text-xl lg:text-2xl font-light text-gray-700 italic">
             and plenty other things.
           </p>
