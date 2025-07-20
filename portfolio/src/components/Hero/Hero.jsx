@@ -99,30 +99,31 @@ function Hero() {
   return (
     <div className="px-4 pt-8 pb-32">
       <div className="min-h-screen relative">
-        {/* Large Name Treatment - Top Right */}
+        {/* Large Name Treatment - Stacked on mobile */}
         <div className="absolute top-0 right-0">
-          <h1 className="text-7xl md:text-9xl font-bold tracking-wide text-gray-900 leading-none text-right">
-            CASEY&nbsp;&nbsp;JOINER
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-bold tracking-wide text-gray-900 leading-none text-right">
+            <span className="block sm:inline">CASEY</span>
+            <span className="block sm:inline sm:ml-4">JOINER</span>
           </h1>
         </div>
 
-        {/* Creative Software Developer - Left side */}
-        <div className="absolute top-48 left-0">
-          <p ref={creativeRef} className="text-2xl font-light text-gray-700">
+        {/* Creative Software Developer - Left side (keep original positioning) */}
+        <div className="absolute top-32 sm:top-40 md:top-48 left-0">
+          <p ref={creativeRef} className="text-base sm:text-lg md:text-xl lg:text-2xl font-light text-gray-700">
             creative software developer
           </p>
         </div>
 
-        {/* Visual Artist - Right side, moved down slightly */}
-        <div className="absolute top-72 right-0">
-          <p ref={visualRef} className="text-2xl font-light text-gray-700">
+        {/* Visual Artist - Right side (keep original positioning) */}
+        <div className="absolute top-48 sm:top-56 md:top-72 right-0">
+          <p ref={visualRef} className="text-base sm:text-lg md:text-xl lg:text-2xl font-light text-gray-700">
             visual artist
           </p>
         </div>
 
-        {/* And plenty other things - Left-center, not fully centered */}
-        <div className="absolute top-96 left-1/4">
-          <p ref={otherRef} className="text-2xl font-light text-gray-700 italic">
+        {/* And plenty other things - Left-center (keep original positioning) */}
+        <div className="absolute top-64 sm:top-72 md:top-96 left-1/4">
+          <p ref={otherRef} className="text-base sm:text-lg md:text-xl lg:text-2xl font-light text-gray-700 italic">
             and plenty other things.
           </p>
         </div>
@@ -160,10 +161,10 @@ function Hero() {
           ))}
         </svg>
 
-        {/* Large Scroll Circle - Visible in viewport */}
-        <div className="absolute bottom-52 left-1/2 transform -translate-x-1/2">
+        {/* Large Scroll Circle - Much closer to text */}
+        <div className="absolute top-80 sm:top-96 md:top-[28rem] lg:bottom-52 left-1/2 transform -translate-x-1/2">
           <div
-            className="w-28 h-28 rounded-full border-2 border-gray-400 flex items-center justify-center cursor-pointer hover:border-gray-600 transition-colors duration-300"
+            className="w-20 h-20 md:w-28 md:h-28 rounded-full border-2 border-gray-400 flex items-center justify-center cursor-pointer hover:border-gray-600 transition-colors duration-300"
             onClick={() => {
               document.getElementById('introduction')?.scrollIntoView({
                 behavior: 'smooth',
@@ -171,7 +172,7 @@ function Hero() {
               });
             }}
           >
-            <div className="text-4xl text-gray-400">
+            <div className="text-2xl md:text-4xl text-gray-400">
               ↓
             </div>
           </div>
@@ -180,5 +181,4 @@ function Hero() {
     </div>
   )
 }
-
 export default Hero

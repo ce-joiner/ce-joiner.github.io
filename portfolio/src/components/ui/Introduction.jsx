@@ -14,7 +14,7 @@ function Introduction() {
         setScrollProgress(latest)
     })
 
-    const text = "An endlessly curious software developer exploring all possibilities of technology through the lens of functional beauty. I make things that are nice to look at and a delight to use. Keep scrolling to see a few of them."
+    const text = "An endlessly curious software developer exploring all possibilities of technology through the lens of functional beauty. I make things that are nice to look at and a delight to use."
     const words = text.split(' ')
 
     return (
