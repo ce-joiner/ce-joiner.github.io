@@ -35,15 +35,16 @@ function About() {
 
   return (
     <div className="px-4 pt-4 pb-32">
-      <div ref={ref} className="max-w-full">
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-12 gap-32 items-start">
+      <div ref={ref} className="max-w-7xl mx-auto">
+        
+        {/* Unified Responsive Layout - Stack until very large screens */}
+        <div className="flex flex-col min-[1400px]:flex-row gap-8 min-[1400px]:gap-32 items-start">
           {/* Left Column - Large Typography with Underlines */}
-          <div className="col-span-12 md:col-span-4 space-y-4">
+          <div className="w-full min-[1400px]:w-auto min-[1400px]:flex-shrink-0 min-[1400px]:max-w-md space-y-4">
             {/* A LITTLE */}
             <div className="relative">
               <motion.div
-                className="text-6xl md:text-7xl font-bold leading-none text-gray-900 tracking-wide"
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-6xl min-[1400px]:text-7xl font-bold leading-none text-gray-900 tracking-wide"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -65,10 +66,10 @@ function About() {
               />
             </div>
 
-            {/* MORE ABOUT - on same line */}
+            {/* MORE ABOUT */}
             <div className="relative">
               <motion.div
-                className="text-6xl md:text-7xl font-bold leading-none text-gray-900 tracking-wide whitespace-nowrap"
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-6xl min-[1400px]:text-7xl font-bold leading-none text-gray-900 tracking-wide min-[1400px]:whitespace-nowrap"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -92,9 +93,9 @@ function About() {
 
             {/* MYSELF with Image */}
             <div className="relative flex items-start gap-4">
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
                 <motion.div
-                  className="text-6xl md:text-7xl font-bold leading-none text-gray-900 tracking-wide"
+                  className="text-4xl md:text-5xl lg:text-6xl xl:text-6xl min-[1400px]:text-7xl font-bold leading-none text-gray-900 tracking-wide"
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
@@ -116,13 +117,13 @@ function About() {
                 />
               </div>
 
-              {/* Photo positioned right after MYSELF - made bigger */}
+              {/* Photo positioned right after MYSELF */}
               <motion.div
                 variants={imageVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
-                className="relative overflow-hidden bg-gray-100 w-36 h-44 flex-shrink-0"
+                className="relative overflow-hidden bg-gray-100 w-28 h-36 md:w-32 md:h-40 lg:w-36 lg:h-44 flex-shrink-0"
               >
                 <img
                   src="public/images/profilePic.webp"
@@ -135,11 +136,11 @@ function About() {
           </div>
 
           {/* Right Column - Text Content */}
-          <div className="col-span-12 md:col-span-8 space-y-8">
+          <div className="w-full min-[1400px]:flex-1 min-[1400px]:max-w-2xl space-y-6 min-[1400px]:space-y-8">
             {/* First Text Block */}
             <div className="relative">
               <motion.p
-                className="text-lg leading-relaxed text-gray-700 font-light mb-2"
+                className="text-base md:text-lg lg:text-lg xl:text-lg min-[1400px]:text-lg leading-relaxed text-gray-700 font-light mb-2"
                 custom={0}
                 variants={textBlockVariants}
                 initial="hidden"
@@ -153,7 +154,7 @@ function About() {
             {/* Second Text Block */}
             <div className="relative">
               <motion.p
-                className="text-lg leading-relaxed text-gray-700 font-light mb-2"
+                className="text-base md:text-lg lg:text-lg xl:text-lg min-[1400px]:text-lg leading-relaxed text-gray-700 font-light mb-2"
                 custom={1}
                 variants={textBlockVariants}
                 initial="hidden"
