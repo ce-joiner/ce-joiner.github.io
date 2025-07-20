@@ -24,16 +24,14 @@ function Hero() {
     const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 400
     
     return nameChars.map(() => {
-      // Calculate safe bounds based on letter size and screen width
-      const letterWidth = 50 // Approximate max letter width
-      const safeMinX = -screenWidth * 0.3 // Don't go too far left
-      const safeMaxX = screenWidth * 0.3 // Don't go too far right
-      const safeMinY = -20 // Stay below nav
-      const safeMaxY = 100 // Stay above descriptions
+      // Keep scatter relative to name position but ensure bounds
+      // Since name is right-aligned, bias scatter more to the left
+      const maxLeftDistance = Math.min(screenWidth * 0.6, 300) // Can go far left
+      const maxRightDistance = Math.min(screenWidth * 0.15, 80) // Limited right distance
       
       return {
-        x: safeMinX + Math.random() * (safeMaxX - safeMinX),
-        y: safeMinY + Math.random() * (safeMaxY - safeMinY),
+        x: -maxLeftDistance + Math.random() * (maxLeftDistance + maxRightDistance),
+        y: -20 + Math.random() * 120, // Vertical stays the same
         rotate: (Math.random() - 0.5) * 360,
         scale: 0.8 + (Math.random() * 0.4)
       }
@@ -82,9 +80,6 @@ function Hero() {
     })
   }
 
-  // Helper to determine if character should have space styling
-  const isSpace = (char) => char === ' '
-  
   // Helper to calculate stagger delay based on character index
   const getStaggerDelay = (index) => {
     // "CASEY" (indices 0-4) starts at 0.3s
@@ -188,11 +183,11 @@ function Hero() {
       <div className="min-h-screen relative">
         {/* Name with entrance animation + interactive scatter effect */}
         <motion.div 
-          className="absolute top-4 left-0 right-0 select-none" // Changed to span full width
+          className="absolute top-4 right-0 select-none" // Back to right alignment
           style={{ pointerEvents: isScattered && isDesktop ? 'none' : 'auto' }}
         >
           <motion.h1 
-            className="cursor-pointer text-5xl sm:text-5xl md:text-7xl lg:text-9xl font-bold tracking-wide leading-none text-right"
+            className="cursor-pointer text-5xl sm:text-5xl md:text-7xl lg:text-9xl font-bold tracking-wide leading-none text-right" // Back to right alignment
             onClick={toggleScatter}
             animate={{ 
               color: isScattered ? "#F02F34" : "#111827",
