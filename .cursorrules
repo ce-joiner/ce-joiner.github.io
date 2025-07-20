@@ -1,0 +1,186 @@
+# Cursor Rules - Casey Joiner Portfolio
+
+## Development Context
+Building an art director-style developer portfolio with React, deployed on GitHub Pages. Focus on editorial design, sophisticated animations, and demonstrating technical skills through execution quality rather than code snippets.
+
+## Code Style & Architecture
+
+### React Components
+- Use functional components with hooks exclusively
+- Single responsibility principle - one component per file
+- Export components as default, use named exports for utilities
+- Props should be destructured in function signature
+- Use TypeScript interfaces for prop types when beneficial
+
+### Styling Approach
+- **Primary**: Tailwind CSS for utility-first styling
+- **Secondary**: Custom CSS modules for complex animations and unique designs
+- **Typography**: Use Tailwind's typography plugin, extend with custom font families
+- **Colors**: Define custom color palette in tailwind.config.js, limit to 2-3 main colors
+- **Responsive**: Desktop-first approach, use Tailwind's responsive prefixes (md:, lg:, xl:)
+
+### Animation Standards
+- Use Framer Motion for all animations - import as `motion`
+- Character-level text animations: split text into spans, animate each character
+- Scroll-based reveals: use `useInView` hook from Framer Motion
+- Hover states: always include smooth transitions with `transition-all duration-300`
+- Performance: use `will-change` sparingly, prefer `transform` over position changes
+
+## Code Quality & Standards
+- **Use latest documentation**: Always reference current React 18+, Framer Motion, and Tailwind CSS docs
+- **DRY principle**: Extract reusable components and utilities, but prioritize readability over extreme abstraction
+- **Shared animation patterns**: Create reusable motion variants for consistent timing and easing
+- **Utility functions**: Extract repeated logic (text splitting, scroll detection) into utils folder
+- **Component reusability**: Build flexible components that can be styled differently via props
+
+## File Structure Rules
+```
+src/
+├── components/
+│   ├── Hero/
+│   ├── Work/
+│   ├── About/
+│   ├── Contact/
+│   └── ui/ (shared components)
+├── styles/
+│   ├── globals.css
+│   └── components/ (CSS modules)
+├── assets/
+└── utils/
+```
+
+## Component Development Rules
+
+### Hero Section
+- Animated name using character-level motion.span elements
+- Subtitle with staggered animation entrance
+- Minimal copy - focus on impact over explanation
+- Use `useEffect` for entrance animations on mount
+
+### Work Section (Primary Focus)
+- Maximum 6 projects, each as individual component
+- Project cards with hover animations that reveal video/interaction
+- Live demo links prominently displayed
+- Technology stack mentioned in paragraph form, not bullet points
+- Each project component should accept: title, description, image, liveUrl, technologies
+
+### Layout Components
+- Use CSS Grid for main layout structure
+- Generous white space - prefer padding over margins
+- Consistent vertical rhythm using Tailwind's space utilities
+- Section components should handle their own spacing
+
+## Animation Implementation Rules
+
+### Text Animations
+```jsx
+// Always split text for character animation
+const text = "Casey Joiner";
+const characters = text.split("");
+// Animate each character with staggered delay
+```
+
+### Scroll Animations
+- Use `useInView` for triggering animations
+- Stagger child animations by 0.1s intervals
+- Animate opacity and transform together
+- Always include `once: true` to prevent re-triggering
+
+### Hover Interactions
+- All interactive elements need hover states
+- Use `whileHover` and `whileTap` from Framer Motion
+- Subtle scale transforms (1.02-1.05 max)
+- Color transitions should use Tailwind's transition utilities
+
+## Performance Rules
+- Lazy load images using `loading="lazy"`
+- Use WebP format for all images
+- Implement proper loading states for all async operations
+- Keep bundle size under 200KB - analyze with `npm run build`
+- Use `React.memo` for components that don't need frequent re-renders
+
+## Content & Copy Rules
+- Professional but personal tone
+- No code snippets or syntax highlighting anywhere
+- Project descriptions focus on problem solved, not features built
+- Technical skills mentioned naturally in context
+- Keep copy concise - prefer showing through interaction over explaining
+
+## GitHub Pages Deployment Rules
+- Use HashRouter for client-side routing
+- Build command: `npm run build`
+- Deploy with gh-pages package
+- Optimize assets for CDN delivery
+- Custom domain setup: CNAME file in public folder
+
+## CSS Guidelines
+- Use Tailwind utilities first, custom CSS only when necessary
+- Custom CSS should be in CSS modules (.module.css)
+- Animation keyframes in custom CSS, triggered by Framer Motion
+- Use CSS custom properties for dynamic values
+- Follow BEM naming for custom CSS classes
+
+## Responsive Design Rules
+- Desktop-first approach (opposite of mobile-first)
+- Breakpoints: xl: 1280px, lg: 1024px, md: 768px, sm: 640px
+- Test on 1440px, 1024px, and 768px as primary breakpoints
+- Use Tailwind's responsive prefixes: `xl:text-6xl lg:text-4xl md:text-3xl`
+
+## Project Showcase Rules
+- Each project needs: hero image, live demo link, brief description
+- Showcase these 4 projects: Body of Work, Vouch, Fresh Futures, Corner Market
+- Present projects chronologically (newest first)
+- Include technology stack in paragraph form within description
+- No "View Code" links - focus on live demos only
+
+## Error Handling & Loading States
+- Always show loading states for any async operations
+- Graceful fallbacks for failed image loads
+- Error boundaries around major sections
+- Loading spinners should match overall design aesthetic
+
+## Typography Rules
+- Use system fonts or carefully selected web fonts
+- Establish clear hierarchy: h1, h2, h3 with consistent sizing
+- Line height should be 1.4-1.6 for body text
+- Use Tailwind's typography utilities, extend when needed
+- Character spacing for headings: `tracking-tight` or `tracking-normal`
+
+## Development Workflow Rules
+
+### Incremental Build Approach
+- **Structure first**: Build layout and components with placeholder content before adding animations
+- **Animations last**: Get functionality solid, then layer in motion and interactions
+- **Component isolation**: Build and test each component individually before integration
+- **Clear task definition**: Define specific, actionable tasks for each development session
+  - Example: "Build Hero layout with placeholder text and basic styling"
+  - Example: "Add character-level animation to Hero name text"
+
+### Content & Asset Management
+- **Placeholder content**: Use Lorem ipsum and placeholder text throughout initial development
+- **Placeholder images**: Use placeholder services (placeholder.com, picsum.photos) during structure phase
+- **Local image storage**: Store final project images in `src/assets/images/` folder
+- **Image optimization**: Convert to WebP format, optimize for web before adding to assets
+- **Image naming**: Use descriptive names: `body-of-work-hero.webp`, `vouch-screenshot.webp`
+
+### Context Management
+- Start new cursor conversations when switching between major sections (Hero → Work → About)
+- Reference these cursor rules at the start of new conversations
+- Keep conversations focused on single components or features
+- Use clear, specific prompts referencing our established patterns
+
+## Code Documentation Rules
+- Include brief, meaningful comments for complex logic or animations
+- Comment animation timing decisions: `// Stagger delay for smooth entrance`
+- Document custom CSS properties and their purpose
+- Explain non-obvious Tailwind class combinations
+- Add TODO comments for future enhancements
+- No verbose JSDoc - keep comments concise and practical
+- Comment Framer Motion variants and their intended effect
+
+## Do Not Include
+- Code snippets or syntax highlighting
+- Terminal/console aesthetics
+- Generic developer portfolio tropes
+- Feature lists or bullet points for projects
+- Complex navigation - keep it simple and editorial 
