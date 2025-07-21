@@ -10,6 +10,9 @@ export default {
         'epilogue': ['Epilogue', 'system-ui', '-apple-system', 'sans-serif'],
         'sans': ['Epilogue', 'system-ui', '-apple-system', 'sans-serif'],
       },
+      backgroundColor: {
+        'custom-white': '#FFFFFC',
+      },
     },
   },
   plugins: [],

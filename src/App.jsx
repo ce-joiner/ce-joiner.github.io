@@ -7,7 +7,7 @@ import Navigation from './components/ui/Navigation'
 
 function App() {
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-custom-white font-sans">
       {/* Navigation */}
       <Navigation />
 
