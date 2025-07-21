@@ -42,12 +42,12 @@ function Hero() {
 
   // Unified variants - same animation for both hover and tap (no color here)
   const letterVariants = {
-    // Initial entrance animation
+    // Initial entrance animation - MUCH MORE DRAMATIC
     hidden: {
-      y: -100,
+      y: -250, // Fall from much higher (was -100)
       opacity: 0,
-      scale: 0.5,
-      rotate: Math.random() * 20 - 10,
+      scale: 0.3, // Start smaller (was 0.5)
+      rotate: Math.random() * 40 - 20, // More random rotation (was 20-10)
     },
     // Normal resting state
     visible: {
@@ -58,10 +58,10 @@ function Hero() {
       rotate: 0,
       transition: {
         type: "spring",
-        damping: 12,
-        stiffness: 100,
-        bounce: 0.6,
-        duration: 0.8,
+        damping: 8, // Less damping = more bounce (was 12)
+        stiffness: 120, // Slightly more responsive (was 100)
+        bounce: 0.8, // Much more bounce (was 0.6)
+        duration: 1.0, // Longer for more dramatic (was 0.8)
       }
     },
     // Scattered state (positions only, color handled by h1)
@@ -82,12 +82,12 @@ function Hero() {
 
   // Helper to calculate stagger delay based on character index
   const getStaggerDelay = (index) => {
-    // "CASEY" (indices 0-4) starts at 0.3s
-    // " " (index 5) has no delay
-    // "JOINER" (indices 6-11) starts at 0.8s
-    if (index <= 4) return 0.3 + (index * 0.1)
+    // More dramatic stagger timing for bigger impact
+    // "CASEY" (indices 0-4) starts at 0.4s with bigger gaps
+    // "JOINER" (indices 6-11) starts at 1.0s
+    if (index <= 4) return 0.4 + (index * 0.15) // Increased stagger (was 0.1)
     if (index === 5) return 0 // Space has no animation
-    return 0.8 + ((index - 6) * 0.1) // Subtract 6 to reset JOINER counter
+    return 1.0 + ((index - 6) * 0.15) // Later start, bigger stagger
   }
 
   useEffect(() => {

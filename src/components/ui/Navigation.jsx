@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Clock from './Clock'
 
 function Navigation() {
-    const [isHovered, setIsHovered] = useState(false)
+    const [isContactOpen, setIsContactOpen] = useState(false)
 
     const handleCopyEmail = async () => {
         try {
@@ -25,6 +25,25 @@ function Navigation() {
         window.open('https://linkedin.com/in/yourusername', '_blank')
     }
 
+    const handleContactClick = () => {
+        // Target the footer to see the contact info properly
+        const footer = document.getElementById('footer')
+        if (footer) {
+            footer.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            })
+        }
+    }
+
+    const handleContactHover = () => {
+        setIsContactOpen(true)
+    }
+
+    const handleContactLeave = () => {
+        setIsContactOpen(false)
+    }
+
     const slideVariants = {
         hidden: { opacity: 0, x: -50 },
         visible: {
@@ -43,21 +62,25 @@ function Navigation() {
         <nav className="fixed top-0 left-0 z-50 w-full">
             <div className="px-4 pt-4 pb-2 relative">
                 {/* Contact Section */}
-                <div
+                <div 
                     className="absolute top-4 left-4"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
+                    onMouseEnter={handleContactHover}
+                    onMouseLeave={handleContactLeave}
                 >
-                    <motion.span
-                        className="text-sm tracking-wide text-gray-800 hover:text-gray-600 transition-colors duration-300 cursor-pointer block"
-                        whileHover={{ scale: 1.02 }}
+                    <motion.button
+                        onClick={handleContactClick}
+                        className="text-sm tracking-wide text-gray-800 cursor-pointer block"
+                        whileHover={{ 
+                            scale: 1.02,
+                            color: "#F02F34"
+                        }}
                         transition={{ duration: 0.2 }}
                     >
                         [contact]
-                    </motion.span>
+                    </motion.button>
 
                     <AnimatePresence>
-                        {isHovered && (
+                        {isContactOpen && (
                             <motion.div
                                 className="mt-4 space-y-2 whitespace-nowrap"
                                 variants={slideVariants}
@@ -108,7 +131,7 @@ function Navigation() {
                     </AnimatePresence>
                 </div>
 
-                {/* Clock - Mobile optimized positioning */}
+                {/* Clock */}
                 <div className="absolute top-4 right-4">
                     <Clock />
                 </div>
