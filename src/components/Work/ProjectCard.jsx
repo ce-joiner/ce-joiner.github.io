@@ -1,4 +1,3 @@
-// src/components/Work/ProjectCard.jsx
 import { motion } from 'framer-motion'
 
 function ProjectCard({ project, index }) {
@@ -116,9 +115,9 @@ function ProjectCard({ project, index }) {
     </motion.div>
   )
 
-  // Render double images
+  // Render double images - mobile grid, desktop stacked
   const DoubleImages = () => (
-    <div className="flex flex-col md:grid md:grid-cols-2 gap-3">
+    <div className="grid grid-cols-2 gap-3 md:grid-cols-2 md:gap-3">
       {images.map((image, imgIndex) => (
         <motion.div
           key={imgIndex}
@@ -246,7 +245,7 @@ function ProjectCard({ project, index }) {
               </p>
             )}
           </div>
-          {/* Images stacked vertically on mobile */}
+          {/* Images in 2x2 grid on mobile for more compact display */}
           <DoubleImages />
           {/* Description and details */}
           <MobileProjectInfo />
