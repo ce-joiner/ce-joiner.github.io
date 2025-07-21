@@ -1,9 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Clock from './Clock'
 
 function Navigation() {
     const [isContactOpen, setIsContactOpen] = useState(false)
+    const [isDesktop, setIsDesktop] = useState(false)
+
+    // Detect if device has hover capability (desktop)
+    useEffect(() => {
+        setIsDesktop(window.matchMedia('(hover: hover)').matches)
+    }, [])
 
     const handleCopyEmail = async () => {
         try {
@@ -37,11 +43,17 @@ function Navigation() {
     }
 
     const handleContactHover = () => {
-        setIsContactOpen(true)
+        // Only open menu on desktop
+        if (isDesktop) {
+            setIsContactOpen(true)
+        }
     }
 
     const handleContactLeave = () => {
-        setIsContactOpen(false)
+        // Only close menu on desktop
+        if (isDesktop) {
+            setIsContactOpen(false)
+        }
     }
 
     const slideVariants = {
