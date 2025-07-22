@@ -290,7 +290,7 @@ function Hero() {
                 y1={line.horizontal.y1}
                 x2={line.horizontal.x2}
                 y2={line.horizontal.y2}
-                stroke="#9CA3AF"
+                stroke="#F02F34"
                 strokeWidth="1"
                 fill="none"
               />
@@ -299,13 +299,13 @@ function Hero() {
                 y1={line.vertical.y1}
                 x2={line.vertical.x2}
                 y2={line.vertical.y2}
-                stroke="#9CA3AF"
+                stroke="#F02F34"
                 strokeWidth="1"
                 fill="none"
               />
               <polygon
                 points={`${line.arrow.x},${line.arrow.y} ${line.arrow.x - 4},${line.arrow.y - 8} ${line.arrow.x + 4},${line.arrow.y - 8}`}
-                fill="#9CA3AF"
+                fill="#F02F34"
               />
             </g>
           ))}

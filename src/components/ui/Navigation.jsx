@@ -24,11 +24,11 @@ function Navigation() {
     }
 
     const handleInstagram = () => {
-        window.open('https://instagram.com/yourusername', '_blank')
+        window.open('https://www.instagram.com/ce_joiner/', '_blank')
     }
 
     const handleLinkedIn = () => {
-        window.open('https://linkedin.com/in/yourusername', '_blank')
+        window.open('https://www.linkedin.com/in/casey-joiner/', '_blank')
     }
 
     const handleContactClick = () => {

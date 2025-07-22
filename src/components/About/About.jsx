@@ -147,7 +147,7 @@ function About() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.5 }}
               >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                I'm a photographer turned full stack software engineer based in New Orleans, LA. I'm currently working as a freelance developer on various projects, bringing a keen sense of form and function to building web applications.
               </motion.p>
             </div>
 
@@ -161,7 +161,21 @@ function About() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.5 }}
               >
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                The transition from making photographs to creating digital experiences felt natural - I think both are about composition, timing, and storytelling. I've worked primarily with React, Node.js, Python, and Django, staying adaptable in solving problems and focused on delivery. For me, execution and aesthetics are inseparable - if it doesn't work beautifully, it doesn't work.
+              </motion.p>
+            </div>
+
+            {/* Third Text Block */}
+            <div className="relative">
+              <motion.p
+                className="text-base md:text-lg lg:text-lg xl:text-lg min-[1400px]:text-lg leading-relaxed text-gray-700 font-light mb-2"
+                custom={2}
+                variants={textBlockVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+              >
+                When I'm not building applications, you can probably find me behind a camera, teaching myself something new, tinkering with AI, or thinking about how to build better connections and digital spaces.
               </motion.p>
             </div>
           </div>
