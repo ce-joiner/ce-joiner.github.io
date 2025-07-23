@@ -123,7 +123,7 @@ function Contact() {
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
           >
             <motion.a
-              href="https://instagram.com/yourusername"
+              href="https://www.instagram.com/ce_joiner/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-300 flex items-center gap-1"
@@ -135,7 +135,7 @@ function Contact() {
             </motion.a>
 
             <motion.a
-              href="https://linkedin.com/in/yourusername"
+              href="https://www.linkedin.com/in/casey-joiner/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-300 flex items-center gap-1"
